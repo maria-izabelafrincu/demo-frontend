@@ -14,10 +14,20 @@ export function updateToDoSuccess(toDo) {
   return { type: types.UPDATE_TODO_SUCCESS, toDo};
 }
 
-export function deleteToDo(toDo) {
-  return { type: types.DELETE_TODO, toDo};
+export function deleteToDoSuccess(toDo) {
+  return { type: types.DELETE_TODO_SUCCESS, toDo};
 }
 
+export function deleteToDo(toDo) {
+  return function (dispatch) {
+    return toDoApi.deleteToDo(toDo).then(() => {
+      dispatch(deleteToDoSuccess(toDo));
+      return;
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
 
 export function loadToDos(){
   return function(dispatch){
@@ -33,10 +43,20 @@ export function saveToDo(toDo) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
     return toDoApi.saveToDo(toDo).then(toDo => {
-      toDo.id ? dispatch(updateToDoSuccess(toDo)) :
+      toDo.title ? dispatch(updateToDoSuccess(toDo)) :
         dispatch(createToDoSuccess(toDo));
     }).catch(error => {
       dispatch(ajaxCallError(error));
+      throw(error);
+    });
+  };
+}
+
+export function updateToDo(toDo) {
+  return function (dispatch) {
+    return toDoApi.updateToDo(toDo).then(response => {
+      dispatch(updateToDoSuccess(response));
+    }).catch(error => {
       throw(error);
     });
   };

@@ -11,7 +11,7 @@ const ToDoListRow = ({toDo, toggleDelete, toggleStatusChange}) => {
       <td>{toDo.description}</td>
       <td>{toDo.created_on}</td>
       <td>{toDo.updated_on}</td>
-      <td><button onClick={(e) => toggleDelete(e, toDo.title)}></button></td>
+      <td><button className="btn btn-danger" onClick={(e) => toggleDelete(e, toDo)}>Delete</button></td>
     </tr>
   );
 };

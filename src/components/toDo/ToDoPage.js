@@ -4,26 +4,33 @@ import * as toDoActions from '../../actions/toDoActions';
 import {bindActionCreators} from 'redux';
 import ToDoList from './ToDoList';
 import {browserHistory} from 'react-router';
+import toastr from 'toastr';
 
 class ToDoPage extends React.Component {
   constructor(props, context){
     super(props, context);
+    this.state={toDo:this.props.toDo};
     this.toggleDelete = this.toggleDelete.bind(this);
     this.statusChanged = this.statusChanged.bind(this);
     this.redirectToAddToDoPage = this.redirectToAddToDoPage.bind(this);
   }
-  
-  toggleDelete(e, title) {
-    //e.preventDefault();
-    console.log("Am apasat " + title);
+
+  //componentWillReceiveProps(nextProps) {
+  //  if (this.props.toDo.is_done != nextProps.toDo.is_done) {
+  //    this.setState({toDo: nextProps.toDo});
+  //  }
+  //}
+
+  toggleDelete(e, toDo) {
+    this.props.actions.deleteToDo(toDo)
+    toastr.success('ToDo deleted');
   }
 
   statusChanged(e, title, value) {
-    console.log("schimb  " + title + "   " + value);
     this.props.toDos.map((toDo) => {
       if(toDo.title === title) {
         toDo.is_done = value;
-        //aici
+        this.props.actions.updateToDo(toDo)
       }
     });
     this.forceUpdate();
