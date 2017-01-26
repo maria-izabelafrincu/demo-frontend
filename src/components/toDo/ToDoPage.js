@@ -15,12 +15,6 @@ class ToDoPage extends React.Component {
     this.redirectToAddToDoPage = this.redirectToAddToDoPage.bind(this);
   }
 
-  //componentWillReceiveProps(nextProps) {
-  //  if (this.props.toDo.is_done != nextProps.toDo.is_done) {
-  //    this.setState({toDo: nextProps.toDo});
-  //  }
-  //}
-
   toggleDelete(e, toDo) {
     this.props.actions.deleteToDo(toDo)
     toastr.success('ToDo deleted');

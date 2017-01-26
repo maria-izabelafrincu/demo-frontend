@@ -53,7 +53,9 @@ class ManageToDoPage extends React.Component {
 
   cancelToDo(){
     //this.setState({saving:false});
-    browserHistory.push('/');
+    this.context.router.push('/');
+    browserHistory.goBack();
+
   }
 
   render(){

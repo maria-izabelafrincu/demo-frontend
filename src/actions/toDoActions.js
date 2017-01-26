@@ -1,6 +1,5 @@
 import * as types from './actionTypes';
 import toDoApi from '../api/toDoApi';
-import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function loadToDosSuccess(toDos) {
   return { type: types.LOAD_TODOS_SUCCESS, toDos};
@@ -41,12 +40,10 @@ export function loadToDos(){
 
 export function saveToDo(toDo) {
   return function (dispatch, getState) {
-    dispatch(beginAjaxCall());
     return toDoApi.saveToDo(toDo).then(toDo => {
       toDo.title ? dispatch(updateToDoSuccess(toDo)) :
         dispatch(createToDoSuccess(toDo));
     }).catch(error => {
-      dispatch(ajaxCallError(error));
       throw(error);
     });
   };
