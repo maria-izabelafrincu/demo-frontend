@@ -81,7 +81,7 @@ ManageToDoPage.contextTypes = {
   router: PropTypes.object
 };
 
-function getToDoById(toDo, title) {
+function getToDoByTitle(toDo, title) {
   const toDO = toDo.filter(toDo => toDo.title == title);
   if (toDO) return toDo[0];
   return null;
@@ -91,7 +91,7 @@ function mapStateToProps(state, ownProps){
   const toDoTitle = ownProps.params.title;
   let toDo = {title: '', description: '', created_on: '', updated_on: '', is_done: false};
   if(toDoTitle && state.toDos.length > 0){
-    toDo = getToDoById(state.toDos, toDoTitle);
+    toDo = getToDoByTitle(state.toDos, toDoTitle);
   }
   return{
     toDo: toDo
