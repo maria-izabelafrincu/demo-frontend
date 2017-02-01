@@ -25,25 +25,28 @@ export default function toDoReducer(state = initialState.toDos, action){
     case types.LOAD_TODOS_SUCCESS:
           return action.toDos;
 
+    case types.GET_TODO_SUCCESS:
+          return action.toDo;
+
     case types.CREATE_TODO_SUCCESS:
           return [...state,
           Object.assign({}, action.toDo)
           ];
 
-      return state.map((todo, index) => {
-        if (index === action.index) {
-          return Object.assign({}, todo)
-        }
-        return todo
-      });
-
-    case types.TOGGLE_TODO_SUCCESS : {
-      const newToDos = updateItemInArray(state.toDos, action.title, todo => {
-        return updateObject(todo, {is_done : !todo.is_done});
-      });
-
-      return updateObject(state, {toDos : newToDos});
-    }
+      //return state.map((todo, index) => {
+      //  if (index === action.index) {
+      //    return Object.assign({}, todo)
+      //  }
+      //  return todo
+      //});
+    //
+    //case types.TOGGLE_TODO_SUCCESS : {
+    //  const newToDos = updateItemInArray(state.toDos, action.title, todo => {
+    //    return updateObject(todo, {is_done : !todo.is_done});
+    //  });
+    //
+    //  return updateObject(state, {toDos : newToDos});
+    //}
 
     case types.UPDATE_TODO_SUCCESS:
       return [

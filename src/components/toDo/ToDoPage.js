@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as toDoActions from '../../actions/toDoActions';
 import {bindActionCreators} from 'redux';
 import ToDoList from './ToDoList';
-import {browserHistory} from 'react-router';
+import {Router, browserHistory} from 'react-router';
 import toastr from 'toastr';
 
 class ToDoPage extends React.Component {
@@ -13,6 +13,7 @@ class ToDoPage extends React.Component {
     this.toggleDelete = this.toggleDelete.bind(this);
     this.statusChanged = this.statusChanged.bind(this);
     this.redirectToAddToDoPage = this.redirectToAddToDoPage.bind(this);
+    this.goToUpdate = this.goToUpdate.bind(this);
   }
 
   toggleDelete(e, toDo) {
@@ -39,12 +40,20 @@ class ToDoPage extends React.Component {
     browserHistory.push('/toDo');
   }
 
+  goToUpdate(e, toDo) {
+    //this.state.toDo = toDo;
+    //this.props.children = {};
+    //Object.assign({}, nextProps.toDo);
+    //this.props.children.toDo = toDo;
+    browserHistory.push('/toDo/' + toDo.title);
+  }
+
   render() {
     const{toDos} = this.props;
     return (
       <div className="jumbotron">
         <h1>TO DO</h1>
-        <ToDoList toDos={toDos} toggleDelete={this.toggleDelete} toggleStatusChange={this.statusChanged} />
+        <ToDoList toDos={toDos} toggleDelete={this.toggleDelete} toggleStatusChange={this.statusChanged} goToUpdate={this.goToUpdate} />
         <input type="submit"
                value="Add To Do"
                className="btn btn-primary"
@@ -61,7 +70,8 @@ ToDoPage.propTypes ={
 
 function mapStateToProps(state, ownProps){
   return{
-    toDos: state.toDos
+    toDos: state.toDos,
+    toDo: state.toDo
   };
 }
 

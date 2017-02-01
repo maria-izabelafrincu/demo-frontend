@@ -13,7 +13,7 @@ class ToDoApi {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify({toDo})
+      body: JSON.stringify(toDo)
     });
     return fetch(request).then(response => {
       return response.json();
@@ -42,6 +42,18 @@ class ToDoApi {
   static deleteToDo(toDo) {
     const request = new Request(`http://localhost:8081/to_do/${toDo.title}`, {
       method: 'DELETE'
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
+  static getToDo(title) {
+    const request = new Request(`http://localhost:8081/to_do/${title}`, {
+      method: 'GET'
     });
 
     return fetch(request).then(response => {

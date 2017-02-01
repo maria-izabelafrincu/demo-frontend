@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import ToDoListRow from './ToDoListRow';
 import mockApi from '../../api/mockToDoApi';
 
-const ToDoList = ({toDos, toggleDelete, toggleStatusChange}) => {
+const ToDoList = ({toDos, toggleDelete, toggleStatusChange, goToUpdate}) => {
   return (
     <table className="table">
       <thead>
@@ -17,7 +17,8 @@ const ToDoList = ({toDos, toggleDelete, toggleStatusChange}) => {
       </thead>
       <tbody>
       {toDos.map(toDo =>
-        <ToDoListRow key={toDo.title} toDo={toDo} toggleDelete={toggleDelete} toggleStatusChange={toggleStatusChange} />
+        <ToDoListRow key={toDo.title} toDo={toDo} toggleDelete={toggleDelete} toggleStatusChange={toggleStatusChange}
+        goToUpdate={goToUpdate}/>
       )}
       </tbody>
     </table>

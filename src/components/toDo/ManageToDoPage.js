@@ -8,13 +8,27 @@ import {browserHistory} from 'react-router';
 
 class ManageToDoPage extends React.Component {
   constructor(props, context) {
-    super(props, context);
-
+    super(props, context)
+    console.log(props);
+    //this.state.errors = {};
+    //this.state.saving = false;
     this.state = {
-      toDo: Object.assign({}, props.toDo),
       errors: {},
       saving: false
     };
+    //console.log(props.actions.getToDo(props.routeParams.title).then(function(toDo){console.log(toDo);}));
+    //props.actions.getToDo(props.routeParams.title)
+    //  .then((toDo) => {
+    //    console.log(toDo);
+    //    this.state = {
+    //      toDo: Object.assign({}, toDo),
+    //      errors: {},
+    //      saving: false
+    //    };
+    //  })
+    //  .catch(error => {
+    //    toastr.error(error);
+    //  });
 
     this.updateToDoState = this.updateToDoState.bind(this);
     this.saveToDo = this.saveToDo.bind(this);
@@ -31,7 +45,7 @@ class ManageToDoPage extends React.Component {
     const field = event.target.name;
     let toDo = this.state.toDo;
     toDo[field] = event.target.value;
-    return this.setState({toDo});
+    return this.setState(toDo);
   }
 
   saveToDo(event){
@@ -53,7 +67,7 @@ class ManageToDoPage extends React.Component {
 
   cancelToDo(){
     //this.setState({saving:false});
-    this.context.router.push('/');
+    //this.context.router.push('/');
     browserHistory.goBack();
 
   }

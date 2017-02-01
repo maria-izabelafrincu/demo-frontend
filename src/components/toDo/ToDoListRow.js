@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const ToDoListRow = ({toDo, toggleDelete, toggleStatusChange}) => {
+const ToDoListRow = ({toDo, toggleDelete, toggleStatusChange, goToUpdate}) => {
   return (
     <tr>
       <td>
         <input type="checkbox" checked={toDo.is_done} onChange={(e) => toggleStatusChange(e, toDo.title, e.target.checked)}></input>
         </td>
-      <td><Link to={'/toDo/' + toDo.title}>{toDo.title}</Link></td>
+      <td><button className="btn btn-danger" onClick={(e) => goToUpdate(e, toDo)}>{toDo.title}</button></td>
       <td>{toDo.description}</td>
       <td>{toDo.created_on}</td>
       <td>{toDo.updated_on}</td>
