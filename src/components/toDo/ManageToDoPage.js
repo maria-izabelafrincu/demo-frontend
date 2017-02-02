@@ -9,30 +9,17 @@ import {browserHistory} from 'react-router';
 class ManageToDoPage extends React.Component {
   constructor(props, context) {
     super(props, context)
-    console.log(props);
-    //this.state.errors = {};
-    //this.state.saving = false;
+    console.log(props.toDo);
     this.state = {
+      toDo: Object.assign({}, props.toDo),
       errors: {},
       saving: false
     };
-    //console.log(props.actions.getToDo(props.routeParams.title).then(function(toDo){console.log(toDo);}));
-    //props.actions.getToDo(props.routeParams.title)
-    //  .then((toDo) => {
-    //    console.log(toDo);
-    //    this.state = {
-    //      toDo: Object.assign({}, toDo),
-    //      errors: {},
-    //      saving: false
-    //    };
-    //  })
-    //  .catch(error => {
-    //    toastr.error(error);
-    //  });
+    console.log(state.toDo);
 
     this.updateToDoState = this.updateToDoState.bind(this);
     this.saveToDo = this.saveToDo.bind(this);
-
+    this.getToDoByTitle = this.getToDoByTitle.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -72,6 +59,14 @@ class ManageToDoPage extends React.Component {
 
   }
 
+  getToDoByTitle(title) {
+    // const toDO = toDo.filter(toDo => toDo.title == title);
+    // if (toDO) return toDo[0];
+    // return null;
+    console.log(title);
+    this.props.actions.getToDo(title)
+  }
+
   render(){
     return(
       <ToDoForm
@@ -95,17 +90,11 @@ ManageToDoPage.contextTypes = {
   router: PropTypes.object
 };
 
-function getToDoByTitle(toDo, title) {
-  const toDO = toDo.filter(toDo => toDo.title == title);
-  if (toDO) return toDo[0];
-  return null;
-}
-
 function mapStateToProps(state, ownProps){
   const toDoTitle = ownProps.params.title;
-  let toDo = {title: '', description: '', created_on: '', updated_on: '', is_done: false};
+  let toDo = {title: '' , description: '', created_on: '', updated_on: '', is_done: false};
   if(toDoTitle && state.toDos.length > 0){
-    toDo = getToDoByTitle(state.toDos, toDoTitle);
+    toDo = this.getToDoByTitle(toDoTitle);
   }
   return{
     toDo: toDo

@@ -9,7 +9,9 @@ import toastr from 'toastr';
 class ToDoPage extends React.Component {
   constructor(props, context){
     super(props, context);
-    this.state={toDo:this.props.toDo};
+    // console.log(props.toDo);
+    // this.state={toDo:props.toDo};
+    // console.log(props.toDo);
     this.toggleDelete = this.toggleDelete.bind(this);
     this.statusChanged = this.statusChanged.bind(this);
     this.redirectToAddToDoPage = this.redirectToAddToDoPage.bind(this);
@@ -41,10 +43,7 @@ class ToDoPage extends React.Component {
   }
 
   goToUpdate(e, toDo) {
-    //this.state.toDo = toDo;
-    //this.props.children = {};
-    //Object.assign({}, nextProps.toDo);
-    //this.props.children.toDo = toDo;
+    console.log(toDo.title);
     browserHistory.push('/toDo/' + toDo.title);
   }
 
