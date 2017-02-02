@@ -23,7 +23,6 @@ class ToDoApi {
   }
 
   static saveToDo(toDo) {
-
     const request = new Request('http://localhost:8081/to_do', {
       method: 'POST',
       headers: new Headers({
@@ -31,7 +30,6 @@ class ToDoApi {
       }),
       body: JSON.stringify(toDo)
     });
-
     return fetch(request).then(response => {
       return response.json();
     }).catch(error => {
@@ -43,7 +41,6 @@ class ToDoApi {
     const request = new Request(`http://localhost:8081/to_do/${toDo.title}`, {
       method: 'DELETE'
     });
-
     return fetch(request).then(response => {
       return response.json();
     }).catch(error => {
@@ -55,14 +52,12 @@ class ToDoApi {
     const request = new Request(`http://localhost:8081/to_do/${title}`, {
       method: 'GET'
     });
-
     return fetch(request).then(response => {
       return response.json();
     }).catch(error => {
       return error;
     });
   }
-
 }
 
 export default ToDoApi;

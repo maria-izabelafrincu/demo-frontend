@@ -9,17 +9,15 @@ import {browserHistory} from 'react-router';
 class ManageToDoPage extends React.Component {
   constructor(props, context) {
     super(props, context)
-    console.log(props.toDo);
     this.state = {
       toDo: Object.assign({}, props.toDo),
       errors: {},
       saving: false
     };
-    console.log(state.toDo);
+    console.log(props.toDo);
 
     this.updateToDoState = this.updateToDoState.bind(this);
     this.saveToDo = this.saveToDo.bind(this);
-    this.getToDoByTitle = this.getToDoByTitle.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -47,7 +45,6 @@ class ManageToDoPage extends React.Component {
   }
 
   redirect(){
-    //this.setState({saving:false});
     toastr.success('ToDo saved');
     this.context.router.push('/');
   }
@@ -57,14 +54,6 @@ class ManageToDoPage extends React.Component {
     //this.context.router.push('/');
     browserHistory.goBack();
 
-  }
-
-  getToDoByTitle(title) {
-    // const toDO = toDo.filter(toDo => toDo.title == title);
-    // if (toDO) return toDo[0];
-    // return null;
-    console.log(title);
-    this.props.actions.getToDo(title)
   }
 
   render(){
@@ -90,14 +79,19 @@ ManageToDoPage.contextTypes = {
   router: PropTypes.object
 };
 
+function getToDoByTitle(toDos, title) {
+  let toDo = toDos.find(toDo => toDo.title == title)
+  return Object.assign({}, toDo)
+}
+
 function mapStateToProps(state, ownProps){
   const toDoTitle = ownProps.params.title;
   let toDo = {title: '' , description: '', created_on: '', updated_on: '', is_done: false};
   if(toDoTitle && state.toDos.length > 0){
-    toDo = this.getToDoByTitle(toDoTitle);
+    toDo = getToDoByTitle(state.toDos, ownProps.params.title);
   }
   return{
-    toDo: toDo
+    toDo
   };
 }
 
