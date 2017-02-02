@@ -12,7 +12,7 @@ class ToDoPage extends React.Component {
     this.toggleDelete = this.toggleDelete.bind(this);
     this.statusChanged = this.statusChanged.bind(this);
     this.redirectToAddToDoPage = this.redirectToAddToDoPage.bind(this);
-    this.goToUpdate = this.goToUpdate.bind(this);
+    //this.goToUpdate = this.goToUpdate.bind(this);
   }
 
   toggleDelete(e, toDo) {
@@ -39,17 +39,17 @@ class ToDoPage extends React.Component {
     browserHistory.push('/toDo');
   }
 
-  goToUpdate(e, toDo) {
-    console.log(toDo.title);
-    this.context.router.push('/toDo/' + toDo.title);
-  }
+  //goToUpdate(e, toDo) {
+  //  console.log(toDo.title);
+  //  this.context.router.push('/toDo/' + toDo.title);
+  //}
 
   render() {
     const{toDos} = this.props;
     return (
       <div className="jumbotron">
         <h1>TO DO</h1>
-        <ToDoList toDos={toDos} toggleDelete={this.toggleDelete} toggleStatusChange={this.statusChanged} goToUpdate={this.goToUpdate} />
+        <ToDoList toDos={toDos} toggleDelete={this.toggleDelete} toggleStatusChange={this.statusChanged} />
         <input type="submit"
                value="Add To Do"
                className="btn btn-primary"
