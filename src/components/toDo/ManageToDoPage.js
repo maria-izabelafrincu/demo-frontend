@@ -14,7 +14,6 @@ class ManageToDoPage extends React.Component {
       errors: {},
       saving: false
     };
-    console.log(props.toDo);
 
     this.updateToDoState = this.updateToDoState.bind(this);
     this.saveToDo = this.saveToDo.bind(this);
@@ -50,10 +49,7 @@ class ManageToDoPage extends React.Component {
   }
 
   cancelToDo(){
-    //this.setState({saving:false});
-    //this.context.router.push('/');
-    browserHistory.goBack();
-
+    browserHistory.push('/');
   }
 
   render(){

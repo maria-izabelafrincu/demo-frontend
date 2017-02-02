@@ -12,7 +12,6 @@ class ToDoPage extends React.Component {
     this.toggleDelete = this.toggleDelete.bind(this);
     this.statusChanged = this.statusChanged.bind(this);
     this.redirectToAddToDoPage = this.redirectToAddToDoPage.bind(this);
-    //this.goToUpdate = this.goToUpdate.bind(this);
   }
 
   toggleDelete(e, toDo) {
@@ -30,7 +29,6 @@ class ToDoPage extends React.Component {
     this.forceUpdate();
   }
 
-
   toDoRow(toDo, index){
     return <div key={index}>{toDo.title}</div>;
   }
@@ -38,11 +36,6 @@ class ToDoPage extends React.Component {
   redirectToAddToDoPage(){
     browserHistory.push('/toDo');
   }
-
-  //goToUpdate(e, toDo) {
-  //  console.log(toDo.title);
-  //  this.context.router.push('/toDo/' + toDo.title);
-  //}
 
   render() {
     const{toDos} = this.props;
